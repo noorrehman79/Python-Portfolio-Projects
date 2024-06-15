@@ -1,0 +1,43 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+def caesar(old_text, shift_amount, cipher_direction):
+  new_text = ""
+  if cipher_direction == "decode":
+    for char in old_text: # char can be number/symbol/space unlike letter.
+      if char in alphabet:
+        position = alphabet.index(char)
+        new_position = position - shift_amount
+        new_text += alphabet[new_position]
+      else: 
+        new_text += char
+    print(f"Here's the decoded result: {new_text}")
+
+  elif cipher_direction == 'encode':
+    for char in old_text:
+      if char in alphabet:
+        position = alphabet.index(char)
+        new_position = position + shift_amount
+        new_text += alphabet[new_position]
+      else: 
+        new_text += char
+    print(f"Here's the encoded result: {new_text}")
+  else:
+    print("You have entered an invalid input. Please try again.")
+
+#TODO-1: Import and print the logo from art.py when the program starts.
+from art import logo
+print(logo) 
+
+restart =  True
+while restart:
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+  text = input("Type your message:\n").lower()
+  shift = int(input("Type the shift number:\n"))
+
+  shift = shift % 26
+
+  caesar(old_text=text, shift_amount=shift, cipher_direction=direction)
+  want_to_continoue = input("Type 'yes' if you want to go again. Otherwise type 'no'.\n")
+  if want_to_continoue == 'no':
+    restart = False
+    print("Goodbye!")
